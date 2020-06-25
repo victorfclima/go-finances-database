@@ -1,6 +1,5 @@
-// import AppError from '../errors/AppError';
-
 import { getCustomRepository, getRepository } from 'typeorm';
+import AppError from '../errors/AppError';
 
 import Transaction from '../models/Transaction';
 import Categories from '../models/Category';
@@ -25,6 +24,11 @@ class CreateTransactionService {
     const transactionRepository = getCustomRepository(TransactionsRepository);
     const categoryRepository = getRepository(Category);
 
+    const { total } = await transactionRepository.getBalance();
+    if (type === 'outcome' && total < value) {
+      throw new AppError('You do not have enough balance');
+    }
+
     let transactionCategory = await categoryRepository.findOne({
       where: {
         title: category,
@@ -47,11 +51,6 @@ class CreateTransactionService {
     });
 
     await transactionRepository.save(transaction);
-
-    // const { total } = await account.getBalance();
-    // if (type === 'outcome' && total < value) {
-    //   throw new Error('You do not have enough balance');
-    // }
 
     return transaction;
   }
