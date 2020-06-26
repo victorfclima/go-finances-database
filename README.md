@@ -4,7 +4,8 @@
 The purpose of this project is to complete the #6 Challenge of the Rocketseat GoStack 12 Bootcamp!<br>
 https://github.com/Rocketseat/bootcamp-gostack-desafios/tree/master/desafio-database-upload
 
-![project-preview](.preview/mobile.gif)
+![project-preview](.preview/preview1.gif)
+
 ---
 
 <h2>:computer: What is supposed to do?</h2>
